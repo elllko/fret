@@ -11,7 +11,8 @@ const scalePatterns = {
   major: [0, 2, 4, 5, 7, 9, 11],
   minor: [0, 2, 3, 5, 7, 8, 10],
   pentMajor: [0, 2, 4, 7, 9],
-  pentMinor: [0, 3, 5, 7, 10]
+  pentMinor: [0, 3, 5, 7, 10],
+  diminished: [0, 1, 3, 4, 6, 7, 9, 10]
 };
 
 const tunings = {
