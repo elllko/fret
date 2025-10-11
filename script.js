@@ -48,6 +48,9 @@ function buildFretboard() {
       const note = notes[(openIndex + fret) % notes.length];
       const div = document.createElement("div");
       div.classList.add("fret");
+
+      if (fret === 0) div.classList.add("zero-fret");
+      
       div.dataset.note = note;
       div.dataset.string = 6 - string;
       div.dataset.fret = fret;
