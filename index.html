@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guitar Key Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>🎸 Guitar Key Visualizer</h1>
+
+    <div class="controls">
+      <label for="keySelect">Choose a key:</label>
+      <select id="keySelect">
+        <option value="C">C Major</option>
+        <option value="G">G Major</option>
+        <option value="D">D Major</option>
+        <option value="A">A Major</option>
+        <option value="E">E Major</option>
+        <option value="B">B Major</option>
+        <option value="F#">F# Major</option>
+        <option value="F">F Major</option>
+      </select>
+    </div>
+
+    <div id="fretboard" class="fretboard"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
