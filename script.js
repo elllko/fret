@@ -1,11 +1,12 @@
 const fretboard = document.getElementById("fretboard");
 const rootSelect = document.getElementById("rootSelect");
 const scaleSelect = document.getElementById("scaleSelect");
+const tuningSelect = document.getElementById("tuningSelect");
+const customTuningInputs = document.getElementById("customTuningInputs");
+const stringInputsContainer = document.querySelector(".string-inputs");
 
-const tuning = ["E", "B", "G", "D", "A", "E"]; // string 1 → 6
 const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-// Scale patterns in semitones
 const scalePatterns = {
   major: [0, 2, 4, 5, 7, 9, 11],
   minor: [0, 2, 3, 5, 7, 8, 10],
@@ -13,14 +14,35 @@ const scalePatterns = {
   pentMinor: [0, 3, 5, 7, 10]
 };
 
-// Build fretboard
+const tunings = {
+  EADGBE: ["E", "B", "G", "D", "A", "E"],
+  DADGBE: ["E", "B", "G", "D", "A", "D"],
+  DADGAD: ["D", "A", "G", "D", "A", "D"],
+  EbAbDbGbBbEb: ["Eb", "Bb", "Gb", "Db", "Ab", "Eb"]
+};
+
+let currentTuning = tunings.EADGBE;
 const totalFrets = 12;
 
+// Initialize dropdowns
+function populateRootNotes() {
+  notes.forEach(note => {
+    const option = document.createElement("option");
+    option.value = note;
+    option.textContent = note;
+    rootSelect.appendChild(option);
+  });
+}
+
+// Build fretboard
 function buildFretboard() {
   fretboard.innerHTML = "";
   for (let string = 0; string < 6; string++) {
-    const openNote = tuning[string];
-    const openIndex = notes.indexOf(openNote);
+    const openNote = currentTuning[string];
+    const openIndex = notes.indexOf(openNote.replace("b", "#")) >= 0
+      ? notes.indexOf(openNote.replace("b", "#"))
+      : notes.indexOf(openNote);
+
     for (let fret = 0; fret <= totalFrets; fret++) {
       const note = notes[(openIndex + fret) % notes.length];
       const div = document.createElement("div");
@@ -49,26 +71,56 @@ function highlightScale(root, scaleType) {
   });
 }
 
-// Populate root note dropdown
-function populateRootNotes() {
-  notes.forEach(note => {
-    const option = document.createElement("option");
-    option.value = note;
-    option.textContent = note;
-    rootSelect.appendChild(option);
-  });
-}
-
-rootSelect.addEventListener("change", updateScale);
-scaleSelect.addEventListener("change", updateScale);
-
 function updateScale() {
   highlightScale(rootSelect.value, scaleSelect.value);
 }
 
+function updateTuning(selected) {
+  if (selected === "custom") {
+    showCustomTuningInputs();
+    return;
+  }
+
+  customTuningInputs.style.display = "none";
+  currentTuning = tunings[selected];
+  buildFretboard();
+  updateScale();
+}
+
+// Custom tuning input UI
+function showCustomTuningInputs() {
+  stringInputsContainer.innerHTML = "";
+  customTuningInputs.style.display = "block";
+
+  for (let i = 0; i < 6; i++) {
+    const input = document.createElement("input");
+    input.placeholder = currentTuning[i];
+    input.value = currentTuning[i];
+    stringInputsContainer.appendChild(input);
+  }
+
+  const applyButton = document.createElement("button");
+  applyButton.textContent = "Apply";
+  applyButton.style.marginLeft = "10px";
+  applyButton.onclick = () => {
+    const newTuning = Array.from(stringInputsContainer.querySelectorAll("input"))
+      .map(input => input.value.trim());
+    currentTuning = newTuning;
+    buildFretboard();
+    updateScale();
+  };
+  stringInputsContainer.appendChild(applyButton);
+}
+
+// Event listeners
+rootSelect.addEventListener("change", updateScale);
+scaleSelect.addEventListener("change", updateScale);
+tuningSelect.addEventListener("change", e => updateTuning(e.target.value));
+
 // Initialize
 populateRootNotes();
-buildFretboard();
 rootSelect.value = "C";
 scaleSelect.value = "major";
+tuningSelect.value = "EADGBE";
+buildFretboard();
 highlightScale("C", "major");
