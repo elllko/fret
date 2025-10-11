@@ -8,19 +8,37 @@
 </head>
 <body>
   <div class="app">
-    <h1>🎸 Guitar Scale Visualizer</h1>
+    <h1>Guitar Scale Visualizer</h1>
 
     <div class="controls">
-      <label for="rootSelect">Root note:</label>
-      <select id="rootSelect"></select>
+      <div class="row">
+        <label for="rootSelect">Root note:</label>
+        <select id="rootSelect"></select>
 
-      <label for="scaleSelect">Scale type:</label>
-      <select id="scaleSelect">
-        <option value="major">Major</option>
-        <option value="minor">Natural Minor</option>
-        <option value="pentMajor">Pentatonic Major</option>
-        <option value="pentMinor">Pentatonic Minor</option>
-      </select>
+        <label for="scaleSelect">Scale type:</label>
+        <select id="scaleSelect">
+          <option value="major">Major</option>
+          <option value="minor">Natural Minor</option>
+          <option value="pentMajor">Pentatonic Major</option>
+          <option value="pentMinor">Pentatonic Minor</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="tuningSelect">Tuning:</label>
+        <select id="tuningSelect">
+          <option value="EADGBE">Standard (E A D G B E)</option>
+          <option value="DADGBE">Drop D (D A D G B E)</option>
+          <option value="DADGAD">DADGAD</option>
+          <option value="EbAbDbGbBbEb">Half Step Down (Eb Ab Db Gb Bb Eb)</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <div id="customTuningInputs" class="custom-tuning">
+        <label>Custom tuning:</label>
+        <div class="string-inputs"></div>
+      </div>
     </div>
 
     <div id="fretboard" class="fretboard"></div>
