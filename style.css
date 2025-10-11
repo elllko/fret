@@ -68,9 +68,11 @@ select {
   transition: background 0.3s;
 }
 
-.fret:first-child {
-  background: #111;
-  border-left: none;
+.fret.zero-fret {
+  background: #1c1c1c;\
+  color: #bbb;
+  font-weight: bold;
+  border-right: 2px solid #666;
 }
 
 .fret.highlight {
