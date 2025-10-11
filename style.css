@@ -10,6 +10,10 @@ body {
   padding-top: 2rem;
 }
 
+h1 {
+  padding-bottom: 0.67em; 
+}
+
 .app {
   text-align: center;
   width: 90%;
@@ -17,7 +21,8 @@ body {
 }
 
 .controls {
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  letter-spacing: 1px;
 }
 
 .row {
@@ -49,13 +54,6 @@ select {
   padding: 3px;
 }
 
-.fret.zero-fret {
-  background: #1c1c1c;
-  color: #bbb;
-  font-weight: bold;
-  border-right: 2px solid #666;
-}
-
 .fretboard {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
@@ -85,4 +83,8 @@ select {
 .fret:hover {
   background: #555;
   cursor: pointer;
+}
+
+.fret.zero-fret {
+  filter: brightness(0.5) saturate(0.3);
 }
