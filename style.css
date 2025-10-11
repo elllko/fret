@@ -49,6 +49,13 @@ select {
   padding: 3px;
 }
 
+.fret.zero-fret {
+  background: #1c1c1c;
+  color: #bbb;
+  font-weight: bold;
+  border-right: 2px solid #666;
+}
+
 .fretboard {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
@@ -66,13 +73,6 @@ select {
   position: relative;
   background: #2a2a2a;
   transition: background 0.3s;
-}
-
-.fret.zero-fret {
-  background: #1c1c1c;
-  color: #bbb;
-  font-weight: bold;
-  border-right: 2px solid #666;
 }
 
 .fret.highlight {
