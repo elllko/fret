@@ -18,7 +18,7 @@ const tunings = {
   EADGBE: ["E", "B", "G", "D", "A", "E"],
   DADGBE: ["E", "B", "G", "D", "A", "D"],
   DADGAD: ["D", "A", "G", "D", "A", "D"],
-  EbAbDbGbBbEb: ["Eb", "Bb", "Gb", "Db", "Ab", "Eb"]
+  EbAbDbGbBbEb: ["D#", "A#", "F#", "C#", "G#", "D#"]
 };
 
 let currentTuning = tunings.EADGBE;
