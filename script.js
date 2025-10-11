@@ -1,12 +1,17 @@
 const fretboard = document.getElementById("fretboard");
-const keySelect = document.getElementById("keySelect");
+const rootSelect = document.getElementById("rootSelect");
+const scaleSelect = document.getElementById("scaleSelect");
 
-// Guitar tuning (standard)
-const tuning = ["E", "B", "G", "D", "A", "E"]; // string 1 to 6
+const tuning = ["E", "B", "G", "D", "A", "E"]; // string 1 → 6
 const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-// Major scale intervals
-const majorScaleSteps = [0, 2, 4, 5, 7, 9, 11];
+// Scale patterns in semitones
+const scalePatterns = {
+  major: [0, 2, 4, 5, 7, 9, 11],
+  minor: [0, 2, 3, 5, 7, 8, 10],
+  pentMajor: [0, 2, 4, 7, 9],
+  pentMinor: [0, 3, 5, 7, 10]
+};
 
 // Build fretboard
 const totalFrets = 12;
@@ -29,24 +34,41 @@ function buildFretboard() {
   }
 }
 
-// Get notes for selected key
-function getMajorScaleNotes(root) {
+function getScaleNotes(root, pattern) {
   const rootIndex = notes.indexOf(root);
-  return majorScaleSteps.map(step => notes[(rootIndex + step) % notes.length]);
+  return pattern.map(step => notes[(rootIndex + step) % notes.length]);
 }
 
-function highlightKey(key) {
-  const scaleNotes = getMajorScaleNotes(key);
+function highlightScale(root, scaleType) {
+  const pattern = scalePatterns[scaleType];
+  const scaleNotes = getScaleNotes(root, pattern);
+
   document.querySelectorAll(".fret").forEach(fret => {
     const note = fret.dataset.note;
     fret.classList.toggle("highlight", scaleNotes.includes(note));
   });
 }
 
-keySelect.addEventListener("change", e => {
-  highlightKey(e.target.value);
-});
+// Populate root note dropdown
+function populateRootNotes() {
+  notes.forEach(note => {
+    const option = document.createElement("option");
+    option.value = note;
+    option.textContent = note;
+    rootSelect.appendChild(option);
+  });
+}
+
+rootSelect.addEventListener("change", updateScale);
+scaleSelect.addEventListener("change", updateScale);
+
+function updateScale() {
+  highlightScale(rootSelect.value, scaleSelect.value);
+}
 
 // Initialize
+populateRootNotes();
 buildFretboard();
-highlightKey("C");
+rootSelect.value = "C";
+scaleSelect.value = "major";
+highlightScale("C", "major");
