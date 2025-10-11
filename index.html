@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guitar Key Visualizer</title>
+  <title>Guitar Scale Visualizer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="app">
-    <h1>🎸 Guitar Key Visualizer</h1>
+    <h1>🎸 Guitar Scale Visualizer</h1>
 
     <div class="controls">
-      <label for="keySelect">Choose a key:</label>
-      <select id="keySelect">
-        <option value="C">C Major</option>
-        <option value="G">G Major</option>
-        <option value="D">D Major</option>
-        <option value="A">A Major</option>
-        <option value="E">E Major</option>
-        <option value="B">B Major</option>
-        <option value="F#">F# Major</option>
-        <option value="F">F Major</option>
+      <label for="rootSelect">Root note:</label>
+      <select id="rootSelect"></select>
+
+      <label for="scaleSelect">Scale type:</label>
+      <select id="scaleSelect">
+        <option value="major">Major</option>
+        <option value="minor">Natural Minor</option>
+        <option value="pentMajor">Pentatonic Major</option>
+        <option value="pentMinor">Pentatonic Minor</option>
       </select>
     </div>
 
