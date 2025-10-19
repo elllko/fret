@@ -89,6 +89,7 @@ select {
   border: 1px solid #ffffff;
   border-radius: 2px;
   overflow: hidden;
+  position: relative;
 }
 
 .fret {
@@ -113,4 +114,39 @@ select {
 .fret:hover {
   filter: brightness(1.3);
   cursor: pointer;
+}
+
+.fret-markers {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  position: absolute;
+  bottom: -18px; /* position below the fretboard */
+  left: 0;
+  width: 100%;
+  height: 18px;
+}
+
+.marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.marker.double::after {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 6px 0 white;
 }
