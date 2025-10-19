@@ -58,6 +58,29 @@ function buildFretboard() {
       fretboard.appendChild(div);
     }
   }
+
+  addFretMarkers();
+}
+
+function addFretMarkers() {
+  const markerPositions = [3, 5, 7, 9, 12];
+  const markerRow = document.createElement("div");
+  markerRow.classList.add("fret-markers");
+
+  for (let fret = 0; fret <= totalFrets; fret++) {
+    const marker = document.createElement("div");
+    marker.classList.add("marker");
+
+    if (markerPositions.includes(fret)) {
+      if (fret === 12) marker.classList.add("double");
+    } else {
+      marker.style.visibility = "hidden";
+    }
+
+    markerRow.appendChild(marker);
+  }
+
+  fretboard.appendChild(markerRow);
 }
 
 function getScaleNotes(root, pattern) {
